@@ -167,8 +167,8 @@ Per la compilazione e l'esecuzione è necessario lanciare i seguenti comandi.
     mpirun --allow-run-as-root --mca btl_vader_single_copy_mechanism none -np [numero_processi] nbody.out [numero_bodies] [numero_iterazioni] [seed]
 
 Verranno generati due file:
--`input.txt` per visualizzare i bodies randomici generati sulla base degli input forniti.
--`output.txt` per visualizzare i valori aggiornati dei bodies.
+-input.txt per visualizzare i bodies randomici generati sulla base degli input forniti.
+-output.txt per visualizzare i valori aggiornati dei bodies.
 In console verrà mostrato il `Tempo speso` per l'esecuzione dell'algoritmo.
 #	Correttezza
 Per dimostrare la correttezza dell'algoritmo sono state effettuate tre esecuzioni, dove in ogn'una di esse veniva cambiato il numero di processi coinvolti. Le immagini sottostanti riportano la generazione dei bodies in input, sempre uguali per le tre esecuzioni ottenuti utilizzando lo stesso seed. In output,  nonostante la variazione del numero di processi, vengono prodotti sempre gli stessi risultati.
