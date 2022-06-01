@@ -174,15 +174,15 @@ In console verrà mostrato il `Tempo speso` per l'esecuzione dell'algoritmo.
 Per dimostrare la correttezza dell'algoritmo sono state effettuate tre esecuzioni, dove in ogn'una di esse veniva cambiato il numero di processi coinvolti. Le immagini sottostanti riportano la generazione dei bodies in input, sempre uguali per le tre esecuzioni ottenuti utilizzando lo stesso seed. In output,  nonostante la variazione del numero di processi, vengono prodotti sempre gli stessi risultati.
 *File di input - Numero Processi = 2*             |  *File di output - Numero Processi = 2*
 :-------------------------:|:-------------------------:
-![inFile](Correttezza/InputNumeroProcessi2.png)  |  ![outFile](Correttezza/OutputNumeroProcessi2.png)
+![inFile](Correttezza/InputNumeroProcessori2.png)  |  ![outFile](Correttezza/OutputNumeroProcessori2.png)
 
 *File di input - Numero Processi = 3*             |  *File di output - Numero Processi = 3*
 :-------------------------:|:-------------------------:
-![inFile](Correttezza/InputNumeroProcessi3.png) |  ![outFile](Correttezza/OutputNumeroProcessi3.png)
+![inFile](Correttezza/InputNumeroProcessori3.png) |  ![outFile](Correttezza/OutputNumeroProcessori3.png)
 
 *File di input - Numero Processi = 5*             |  *File di output - Numero Processi = 5*
 :-------------------------:|:-------------------------:
-![inFile](Correttezza/InputNumeroProcessi5.png)  |  ![outFile](Correttezza/OutputNumeroProcessi5.png)
+![inFile](Correttezza/InputNumeroProcessori5.png)  |  ![outFile](Correttezza/OutputNumeroProcessori5.png)
 #	Benchmarks
 L'algoritmo è stato eseguito su **Google Cloud Platform** utilizzando 6 macchine virtuali **e2-standard-4** dotate 4 vCPUs e 16GB di Memoria RAM, per un totale di 24 vCPUs, al fine di osservare **Strong** e **Weak Scalabity** dello stesso.
 ##	Strong Scalability
