@@ -1,4 +1,4 @@
-﻿Casolaro Alessio
+Casolaro Alessio
 Matricola: 0522501326
 #	Sommario
 - [Sommario](#sommario)
@@ -7,7 +7,7 @@ Matricola: 0522501326
 - [Dettagli implementativi](#dettagli-implementativi)
 	- [Struttura per il tipo Body](#struttura-per-il-tipo-body)
 	- [Inizializzazione bodies](#inizializzazione-bodies)
-	- [Calcolo velocità e aggiornamento posizione bodies](#)
+	- [Calcolo velocità e aggiornamento posizione bodies](#Calcolo-velocità-e-aggiornamento-posizione-bodies )
 	- [Comunicazione](#comunicazione)
 - [Istruzioni per l'esecuzione](#istruzioni-per-lesecuzione) 
 - [Correttezza](#correttezza)
@@ -73,8 +73,8 @@ Viene richiamata la funzione `randomizeBodies` per la generazione random dei bod
     {
 	    srand(seed);//Seme per la generazione random
 	    for(int i = 0; i < n_bodies; i++){
-		    body[i].x = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
-		    body[i].y = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
+			body[i].x = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
+			body[i].y = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
 	    	body[i].z = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
 	    	body[i].vx = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
 	    	body[i].vy = 2.0f * (rand() / (float)RAND_MAX) - 1.0f;
@@ -91,17 +91,17 @@ Una volta ottenuti i dati da utilizzare per la simulazione, viene stabilita la q
 
 Essi saranno ottenuti basandosi sul *numero di processi* utilizzato, sul *numero di bodies* e un eventuale *resto*.
 
-    int rest = n_bodies % world_size;
-    int lenght = n_bodies / world_size;
-    int index = 0;
-    for(int i=0; i<world_size; i++){
-	    sendcounts[i] = lenght;
-	    if(rest > 0){
-		    rest--;
-		    sendcounts[i] = sendcounts[i] + 1;
+	int rest = n_bodies % world_size;
+	int lenght = n_bodies / world_size;
+	int index = 0;
+	for(int i=0; i<world_size; i++){
+		sendcounts[i] = lenght;
+		if(rest > 0){
+			rest--;
+			sendcounts[i] = sendcounts[i] + 1;
 		}
-	    displs[i] = index;
-	    index += sendcounts[i];
+		displs[i] = index;
+		index += sendcounts[i];
     }
 
 ## Calcolo velocità e aggiornamento posizione bodies 
@@ -132,13 +132,13 @@ La funzione `body_force` è usata per calcolare la velocità dei bodies sui tre 
 Dopo aver aggiornato le velocità, vengono calcolate e aggiornate le nuove posizioni dei bodies.
 
     void  updateBodies(Body *body, float  dt, int  displs, int  sendcounts){
-	    for(int i = displs; i < displs + sendcounts; i++){
-		    //Aggiorno le posizioni
-		    body[i].x += body[i].vx*dt;
-		    body[i].y += body[i].vy*dt;
-		    body[i].z += body[i].vz*dt;
-    	}
-    }
+		for(int i = displs; i < displs + sendcounts; i++){
+			//Aggiorno le posizioni
+			body[i].x += body[i].vx*dt;
+			body[i].y += body[i].vy*dt;
+			body[i].z += body[i].vz*dt;
+		}
+	}
 
 ## Comunicazione 
 
@@ -166,10 +166,10 @@ Per la compilazione e l'esecuzione è necessario lanciare i seguenti comandi.
     
     mpirun --allow-run-as-root --mca btl_vader_single_copy_mechanism none -np [numero_processi] nbody.out [numero_bodies] [numero_iterazioni] [seed]
 
-Verranno generati due file:
--input.txt per visualizzare i bodies randomici generati sulla base degli input forniti.
--output.txt per visualizzare i valori aggiornati dei bodies.
-In console verrà mostrato il `Tempo speso` per l'esecuzione dell'algoritmo.
+Verranno generati due file:\
+`input.txt` per visualizzare i bodies randomici generati sulla base degli input forniti.\
+`output.txt` per visualizzare i valori aggiornati dei bodies.\
+In console verrà mostrato il `Tempo speso`(in secondi) per l'esecuzione dell'algoritmo.
 #	Correttezza
 Per dimostrare la correttezza dell'algoritmo sono state effettuate tre esecuzioni, dove in ogn'una di esse veniva cambiato il numero di processi coinvolti. Le immagini sottostanti riportano la generazione dei bodies in input, sempre uguali per le tre esecuzioni ottenuti utilizzando lo stesso seed. In output,  nonostante la variazione del numero di processi, vengono prodotti sempre gli stessi risultati.
 *File di input - Numero Processi = 2*             |  *File di output - Numero Processi = 2*
@@ -189,7 +189,7 @@ L'algoritmo è stato eseguito su **Google Cloud Platform** utilizzando 6 macchin
 Per osservare la Strong Scalability sono stati eseguiti due test, con 10000 e 20000 bodies, aumentando volta per volta il numero di vCPUs lasciando la taglia dell'input inalterata.
 
 ###	Strong Scalability 10000 bodies
-|vCPUs|Tempo|Speed-up|
+|vCPUs|Tempo(in secondi)|Speed-up|
 |-|-|-|
 |1|9.58542|-
 |2|4.80652|1,99|
@@ -217,7 +217,7 @@ Per osservare la Strong Scalability sono stati eseguiti due test, con 10000 e 20
 |24|0.73999|12,95|
 
 ###	Strong Scalability 20000 bodies
-|vCPUs|Tempo|Speed-up|
+|vCPUs|Tempo(in secondi)|Speed-up|
 |-|-|-|
 | 1 | 38.19453 |-
 | 2 | 19.19151 |1,99
@@ -250,7 +250,7 @@ Per osservare la Strong Scalability sono stati eseguiti due test, con 10000 e 20
 
 ##	Weak Scalability
 Per valutare la Weak Scalability sono stati effettuati test aumentando la taglia dell'input in maniera uniforme rispetto al numero di processi, quindi si è fatto lavorare ogni vCPU con 2000 bodies, fino ad arrivare ad utilizzare 48000 bodies su 24 vCPUs.
-|vCPUs|Tempo|Numero Bodies|
+|vCPUs|Tempo(in secondi)|Numero Bodies|
 |-|-|-|
 | 1  | 0.38539 | 2000   
 | 2  | 0.77384 | 4000   |
@@ -282,6 +282,6 @@ Per valutare la Weak Scalability sono stati effettuati test aumentando la taglia
 ![WeakScalability](Benchmarks/WeakScalability.png)  
 
 # Conclusioni
-Come è possibile osservare dai valori ottenuti e dai grafici risultanti l'algoritmo, nei benchmarks di valutazione della Strong Scalability, ha ottenuto un buon punteggio in termini di Speed Up, riuscendo a ridurre il tempo già con l'utilizzo di 2 vCPUs e mostrando un continuo decremento al crescere delle vCPUs.
+Come è possibile osservare dai valori ottenuti e dai grafici risultanti l'algoritmo, nei benchmarks di valutazione della Strong Scalability, ha ottenuto un buon punteggio in termini di Speed Up, riuscendo a ridurre il tempo già con l'utilizzo di 2 vCPUs e mostrando decrementi, seppur non costanti per via dell'aumento dell'overhead, al crescere delle vCPUs.\
 In termini di Weak Scalability, l'algoritmo si è dimostrato non molto efficiente in quanto ci sono state crescite costanti nei tempi d'esecuzione.
 
